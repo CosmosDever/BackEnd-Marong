@@ -1,0 +1,17 @@
+version: "3.9"  # You can remove the version if you're using a newer Docker Compose
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: "yes" # replace with your root password
+      MYSQL_DATABASE: marong_db         # optional: replace with your desired DB name
+    ports:
+      - "3306:3306"
+    volumes:
+      - /Users/poom/IdeaProjects/BackEnd-Marong/marongDB.sql:/docker-entrypoint-initdb.d/marongDB.sql
+    networks:
+      - backend-marong
+networks:
+  backend-marong:
+    driver: bridge
