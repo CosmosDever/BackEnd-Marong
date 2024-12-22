@@ -10,7 +10,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /Users/poom/IdeaProjects/BackEnd-Marong/marongDB.sql:/docker-entrypoint-initdb.d/marongDB.sql
+      - ./marongDB.sql:/docker-entrypoint-initdb.d/marongDB.sql
     networks:
       - backend-marong
 
