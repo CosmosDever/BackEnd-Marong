@@ -4,7 +4,7 @@ CREATE TABLE users (
                        gmail VARCHAR(255) NOT NULL UNIQUE,
                        full_name VARCHAR(255) NOT NULL,
                        birthday DATETIME,
-                       telephone DATETIME,
+                       telephone INT,
                        gender VARCHAR(50),
                        password VARCHAR(255) NOT NULL,
                        picture VARCHAR(255),
@@ -14,8 +14,8 @@ CREATE TABLE users (
 -- Insert Mock Data for Users
 INSERT INTO users (gmail, full_name, birthday, telephone, gender, password, picture)
 VALUES
-    ('john.doe@example.com', 'John Doe', '1990-01-01 00:00:00', '2024-01-01 12:00:00', 'Male', 'hashed_password_1', 'http://example.com/john.jpg'),
-    ('jane.smith@example.com', 'Jane Smith', '1992-02-02 00:00:00', '2024-02-02 12:00:00', 'Female', 'hashed_password_2', 'http://example.com/jane.jpg');
+    ('john.doe@example.com', 'John Doe', '1990-01-01 00:00:00', '0849874867', 'Male', 'hashed_password_1', 'http://example.com/john.jpg'),
+    ('jane.smith@example.com', 'Jane Smith', '1992-02-02 00:00:00', '0984783758', 'Female', 'hashed_password_2', 'http://example.com/jane.jpg');
 
 -- Create Cases Table
 CREATE TABLE cases (
