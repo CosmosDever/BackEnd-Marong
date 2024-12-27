@@ -118,8 +118,10 @@ CREATE TABLE roles (
 -- Insert Mock Data for Roles
 INSERT INTO roles (role_name, description)
 VALUES
-    ('Admin', 'Administrator with full access'),
-    ('User', 'Regular user with limited access');
+    ('Admin', 'Administrator with Admin access'),
+    ('User', 'Regular user with limited access'),
+    ('master Admin','Administrator with full access')
+    ;
 
 -- Create User Roles Table
 CREATE TABLE user_roles (
