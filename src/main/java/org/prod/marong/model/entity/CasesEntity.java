@@ -1,4 +1,4 @@
 package org.prod.marong.model.entity;
 
-public class TestEntity {
+public class CasesEntity {
 }
