@@ -14,4 +14,7 @@ public interface NewsRepository extends JpaRepository<NewsEntity, Long> {
 
     @Query("SELECT n FROM NewsEntity n WHERE n.id = :id")
     NewsEntity findNewsById(String id);
+
+
+
 }

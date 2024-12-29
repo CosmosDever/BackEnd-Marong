@@ -25,4 +25,10 @@ public class NewsEntity {
 
     @Column(name = "location")
     private String location;
+
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "type")
+    private String type;
 }

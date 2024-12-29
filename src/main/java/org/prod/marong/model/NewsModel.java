@@ -11,4 +11,5 @@ public class NewsModel {
     private String detail;
     private LocalDate date;
     private String location;
+    private String content;
 }

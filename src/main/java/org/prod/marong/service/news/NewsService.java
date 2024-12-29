@@ -32,6 +32,7 @@ public class NewsService {
             model.setDetail(entity.getDetail());
             model.setLocation(entity.getLocation()); // Static or derived location
             model.setDate(entity.getDate());
+            model.setContent(entity.getContent());
             return model;
         }).collect(Collectors.toList());
 
@@ -46,8 +47,34 @@ public class NewsService {
         newsModel.setLocation(news.getLocation());
         newsModel.setDate(news.getDate());
         newsModel.setPicture(news.getPicture());
+        newsModel.setContent(news.getContent());
         return newsModel;
 
 
+    }
+    
+    public NewsModel addNews(String title, String content, String location, String type, String picture) {
+        // Create a new NewsEntity
+        NewsEntity newsEntity = new NewsEntity();
+        newsEntity.setDetail(title);
+        newsEntity.setContent(content);
+        newsEntity.setLocation(location);
+        newsEntity.setType(type);
+        newsEntity.setPicture(picture);
+
+
+        // Save the entity to the database
+        NewsEntity savedEntity = newsRepository.save(newsEntity);
+
+        // Map the saved entity to a NewsModel
+        NewsModel savedModel = new NewsModel();
+        savedModel.setId(String.valueOf(savedEntity.getId()));
+        savedModel.setDetail(savedEntity.getDetail());
+        savedModel.setContent(savedEntity.getContent());
+        savedModel.setLocation(savedEntity.getLocation());
+        savedModel.setDate(savedEntity.getDate());
+        savedModel.setPicture(savedEntity.getPicture());
+        
+        return savedModel;
     }
 }
