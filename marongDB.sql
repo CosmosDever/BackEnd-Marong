@@ -63,6 +63,7 @@ VALUES
 CREATE TABLE news (
                       id INT AUTO_INCREMENT PRIMARY KEY,
                       title VARCHAR(255) NOT NULL,
+                      type VARCHAR(255) NOT NULL,
                       content TEXT NOT NULL,
                       picture VARCHAR(255),
                       location VARCHAR(255),
@@ -71,10 +72,10 @@ CREATE TABLE news (
 );
 
 -- Insert Mock Data for News
-INSERT INTO news (title, content, picture, location)
+INSERT INTO news (title,type, content, picture, location)
 VALUES
-    ('Road Repairs Starting Soon', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street'),
-    ('Park Sidewalk Renovation', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park');
+    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street'),
+    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park');
 
 -- Create Email Verifications Table
 CREATE TABLE email_verifications (
