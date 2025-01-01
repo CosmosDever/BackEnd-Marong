@@ -13,7 +13,10 @@ public interface ReportRepository extends JpaRepository<ReportEntity, Long> {
     @Query("SELECT n FROM ReportEntity n WHERE n.id = :id")
     ReportEntity findReportById(@Param("id") String id);
 
-    @Query("SELECT r.status FROM ReportEntity r WHERE r.case_id = :id")
-    List<String> findReportStatusById(@Param("id") String id);
+    @Query("SELECT r.status FROM ReportEntity r WHERE r.caseId = :id")
+    String findReportStatusById(@Param("id") String id);
+
+    @Query("SELECT r.status FROM ReportEntity r")
+    List<String> findReportStatus();
 
 }

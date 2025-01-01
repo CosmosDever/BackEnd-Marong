@@ -21,21 +21,21 @@ public class CaseController {
     @Autowired
     CaseService caseService;
 
-//    @GetMapping("/api/case/all")
-//    public ResponseModel getAllCase(){
-//        try {
-//            List<CasesModel> caseList = caseService.getAllCase();
-//            return ResponseModel.builder()
-//                    .statusCode(SUCCESS)
-//                    .statusMessage("All data retrieved successfully")
-//                    .data(caseList)
-//                    .build();
-//        } catch (Exception e) {
-//            return ResponseModel.builder()
-//                    .statusCode(ERROR)
-//                    .statusMessage("Error retrieving data: " + e.getMessage())
-//                    .build();
-//        }
-//    }
+    @GetMapping("/api/case/all")
+    public ResponseModel getAllCase(){
+        try {
+            List<CasesModel> caseList = caseService.getAllCaseWithStatus();
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("All data retrieved successfully")
+                    .data(caseList)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("Error retrieving data: " + e.getMessage())
+                    .build();
+        }
+    }
 
 }
