@@ -27,8 +27,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return loadUserByUserId(username);
+    public UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByGmail(gmail);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with gmail: " + gmail);
+        }
+        return new User(user.getGmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     public UserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
