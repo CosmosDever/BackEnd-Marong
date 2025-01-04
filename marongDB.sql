@@ -111,7 +111,7 @@ VALUES
 
 -- Create Roles Table
 CREATE TABLE roles (
-                       id INT AUTO_INCREMENT PRIMARY KEY,
+                       id INT AUTO_INCREMENT  PRIMARY KEY,
                        role_name VARCHAR(255) NOT NULL UNIQUE,
                        description VARCHAR(255)
 );
