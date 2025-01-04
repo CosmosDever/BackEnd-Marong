@@ -6,7 +6,6 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
       MYSQL_DATABASE: marong_db
-
     ports:
       - "3306:3306"
     volumes:
@@ -15,11 +14,10 @@ services:
       - backend-marong
 
   springboot-app:
-    image: springboot-app:latest  # Replace with your Spring Boot app image
-    container_name: springboot-container
     build:
       context: .  # Dockerfile for Spring Boot should be in the same directory
       dockerfile: Dockerfile
+    container_name: springboot-container
     ports:
       - "8080:8080"
     environment:
@@ -31,8 +29,12 @@ services:
       - mysql
     networks:
       - backend-marong
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 networks:
   backend-marong:
     driver: bridge
-

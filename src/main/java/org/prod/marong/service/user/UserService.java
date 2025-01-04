@@ -8,6 +8,9 @@ import org.prod.marong.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.prod.marong.model.entity.RoleEntity;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
 
@@ -24,7 +27,9 @@ public class UserService {
         userModel.setBirthday(String.valueOf(userData.getBirthday()));
         userModel.setGender(userData.getGender());
         userModel.setPicture(userData.getPicture());
-        userModel.setRoles(userData.getRoles());
+        userModel.setRoles(userData.getRoles().stream()
+            .map(RoleEntity::toString)
+            .collect(Collectors.joining(", ")));
         return userModel;
     }
 
