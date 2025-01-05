@@ -23,6 +23,7 @@ CREATE TABLE cases (
                        category VARCHAR(255) NOT NULL,
                        detail VARCHAR(255) NOT NULL,
                        picture VARCHAR(255),
+                       picture_done VARCHAR(255),
                        location VARCHAR(255),
                        date_opened DATETIME DEFAULT NOW(),
                        date_closed DATETIME,
@@ -166,3 +167,4 @@ INSERT INTO role_permissions (role_id, permission_id)
 VALUES
     (1, 1),  -- Admin can view reports
     (1, 2);  -- Admin can edit reports
+
