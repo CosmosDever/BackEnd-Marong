@@ -15,7 +15,8 @@ CREATE TABLE users (
 INSERT INTO users (gmail, full_name, birthday, telephone, gender, password, picture)
 VALUES
     ('john.doe@example.com', 'John Doe', '1990-01-01 00:00:00', '0849874867', 'Male', 'hashed_password_1', 'http://example.com/john.jpg'),
-    ('jane.smith@example.com', 'Jane Smith', '1992-02-02 00:00:00', '0984783758', 'Female', 'hashed_password_2', 'http://example.com/jane.jpg');
+    ('jane.smith@example.com', 'Jane Smith', '1992-02-02 00:00:00', '0984783758', 'Female', 'hashed_password_2', 'http://example.com/jane.jpg'),
+    ('msaidmin@gmail.com', 'Master Admin', '1992-02-02 00:00:00', '0984783758','Male', '$2a$10$ZRCWxcMW1egzmMq66ggkwe7UwTVApaql9AkuL3GdaUp8ZBykzWoLi', 'http://example.com/jane.jpg');
 
 -- Create Cases Table
 CREATE TABLE cases (
@@ -120,9 +121,9 @@ CREATE TABLE roles (
 -- Insert Mock Data for Roles
 INSERT INTO roles (role_name, description)
 VALUES
-    ('Admin', 'Administrator with Admin access'),
-    ('User', 'Regular user with limited access'),
-    ('master Admin','Administrator with full access')
+    ('ROLE_Admin', 'Administrator with Admin access'),
+    ('ROLE_User', 'Regular user with limited access'),
+    ('ROLE_master Admin','Administrator with full access')
     ;
 
 -- Create User Roles Table
@@ -138,7 +139,9 @@ CREATE TABLE user_roles (
 INSERT INTO user_roles (user_id, role_id)
 VALUES
     (1, 1),  -- John Doe as Admin
-    (2, 2);  -- Jane Smith as User
+    (2, 2),  -- Jane Smith as User
+    (3, 3);  -- Master Admin
+
 
 -- Create Permissions Table
 CREATE TABLE permissions (

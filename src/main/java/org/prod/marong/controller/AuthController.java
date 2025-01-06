@@ -18,6 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -35,43 +37,65 @@ public class AuthController {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtGenerator = new JWTGenerator();
-
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDto loginDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginDto.getGmail(),
-                        loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtGenerator.generateToken(authentication);
-        return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
+    public ResponseEntity<Object> login(@RequestBody LoginDto loginDto) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginDto.getGmail(),
+                            loginDto.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String token = jwtGenerator.generateToken(authentication);
+            
+            return new ResponseEntity<>(Collections.singletonMap("data", Collections.singletonMap("token", Collections.singletonList(token))), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Invalid login credentials", HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@RequestBody UserRegistrationDto userDto) {
-        if (userRepository.existsByGmail(userDto.getGmail())) {
-            return new ResponseEntity<>("Gmail is taken!", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Object> registerUser(@RequestBody UserRegistrationDto userDto) {
+        try {
+            if (userRepository.existsByGmail(userDto.getGmail())) {
+                return new ResponseEntity<>("Gmail is taken!", HttpStatus.BAD_REQUEST);
+            }
+
+            // Create a new UserEntity
+            UserEntity user = new UserEntity();
+            user.setFullName(userDto.getFullName());
+            user.setGmail(userDto.getGmail());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user.setTelephone(userDto.getTelephone());
+            user.setGender(userDto.getGender());
+            user.setBirthday(userDto.getBirthday());
+
+            // Assign roles
+            RoleEntity userRole = roleRepository.findByName("User")
+                    .orElseThrow(() -> new RuntimeException("Role not found"));
+            user.setRoles(Collections.singletonList(userRole));
+
+            // Save the user
+            UserEntity savedUser = userRepository.save(user);
+
+            // Create response
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("id", savedUser.getId());
+            responseData.put("full_name", savedUser.getFullName());
+            responseData.put("email", savedUser.getGmail());
+            responseData.put("phone", savedUser.getTelephone());
+            responseData.put("gender", savedUser.getGender());
+            responseData.put("birthday", savedUser.getBirthday());
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", "success");
+            response.put("message", "User account created successfully.");
+            response.put("data", responseData);
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred during registration", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        // Create a new UserEntity
-        UserEntity user = new UserEntity();
-        user.setFullName(userDto.getFullName());
-        user.setGmail(userDto.getGmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setTelephone(userDto.getTelephone());
-        user.setGender(userDto.getGender());
-        user.setBirthday(userDto.getBirthday());
-
-        // Assign roles
-        RoleEntity userRole = roleRepository.findByName("User")
-                .orElseThrow(() -> new RuntimeException("Role not found"));
-        user.setRoles(Collections.singletonList(userRole));
-
-        // Save the user
-        userRepository.save(user);
-
-        return new ResponseEntity<>("Sign up success!", HttpStatus.OK);
     }
 }

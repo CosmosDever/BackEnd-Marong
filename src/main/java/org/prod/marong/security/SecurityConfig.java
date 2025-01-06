@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/admin/**").hasRole("master Admin")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
