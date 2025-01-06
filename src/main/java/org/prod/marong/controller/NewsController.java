@@ -3,6 +3,7 @@ package org.prod.marong.controller;
 
 import org.modelmapper.ModelMapper;
 import org.prod.marong.model.NewsModel;
+import org.prod.marong.model.NewsResponseModel;
 import org.prod.marong.model.ResponseModel;
 import org.prod.marong.model.UserModel;
 import org.prod.marong.model.entity.NewsEntity;
@@ -71,7 +72,7 @@ public class NewsController {
                                   @RequestParam("type") String type,
                                   @RequestParam("picture") String picture ){
         try {
-            NewsModel newsList = newsService.addNews(title, content, location, type, picture);
+            NewsEntity newsList = newsService.addNews(title, content, location, type, picture);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
@@ -86,38 +87,44 @@ public class NewsController {
         }
     }
 
-//    @DeleteMapping("/api/News/{id}/Delete")
-//    public ResponseModel deleteNews(@PathVariable("id") String id){
-//        try {
-//            NewsModel newsList = newsService.deleteNewsById(id);
-//            return ResponseModel.builder()
-//                    .statusCode(SUCCESS)
-//                    .statusMessage("All data retrieved successfully")
-//                    .data(newsList)
-//                    .build();
-//        } catch (Exception e) {
-//            return ResponseModel.builder()
-//                    .statusCode(ERROR)
-//                    .statusMessage("Error Add news: " + e.getMessage())
-//                    .build();
-//        }
-//    }
+    @DeleteMapping("/api/News/{id}/Delete")
+    public ResponseModel deleteNews(@PathVariable("id") String id){
+        try {
+            NewsEntity newsList = newsService.deleteNewsById(id);
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("News article deleted successfully.")
+                    .data(newsList)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("News article with the specified ID was not found: " + e.getMessage())
+                    .build();
+        }
+    }
 
-//    @PostMapping("/api/News/{id}/edit")
-//    public ResponseModel deleteNews(@PathVariable("id") String id){
-//        try {
-//            NewsModel newsList = newsService.editNewsById(id);
-//            return ResponseModel.builder()
-//                    .statusCode(SUCCESS)
-//                    .statusMessage("All data retrieved successfully")
-//                    .data(newsList)
-//                    .build();
-//        } catch (Exception e) {
-//            return ResponseModel.builder()
-//                    .statusCode(ERROR)
-//                    .statusMessage("Error Add news: " + e.getMessage())
-//                    .build();
-//        }
-//    }
+    @PostMapping("/api/News/{id}/Edit")
+    public ResponseModel editNews( @PathVariable("id") String id,
+                                   @RequestParam("title") String title,
+                                   @RequestParam("content") String content,
+                                   @RequestParam("location") String location,
+                                   @RequestParam("type") String type,
+                                   @RequestParam("picture") String picture
+                                   ){
+        try {
+            NewsResponseModel newsList = newsService.editNewsById(id,title, content, location, type, picture);
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("All data retrieved successfully")
+                    .data(newsList)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("Error Add news: " + e.getMessage())
+                    .build();
+        }
+    }
 
 }

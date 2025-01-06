@@ -30,33 +30,33 @@ public class TestController {
 
 
     @SuppressWarnings("rawtypes")
-    @GetMapping("/api/test")
-    public Object marongTest(){
-        try {
-            String testData = testService.getTestData();
-            ResponseModel response = ResponseModel.builder()
-                    .statusCode(SUCCESS)
-                    .statusMessage("Successful Operation")
-                    .data(testData)
-                    .build();
-            return response;
-        } catch (Exception e) {
-            ResponseModel response = ResponseModel.builder()
-                    .statusCode(ERROR)
-                    .statusMessage("Error Occurred : " + e.getMessage())
-                    .build();
-            return response;
-        }
-    }
+//    @GetMapping("/api/test")
+//    public Object marongTest(){
+//        try {
+//            String testData = testService.getTestData();
+//            ResponseModel response = ResponseModel.builder()
+//                    .statusCode(SUCCESS)
+//                    .statusMessage("Successful Operation")
+//                    .data(testData)
+//                    .build();
+//            return response;
+//        } catch (Exception e) {
+//            ResponseModel response = ResponseModel.builder()
+//                    .statusCode(ERROR)
+//                    .statusMessage("Error Occurred : " + e.getMessage())
+//                    .build();
+//            return response;
+//        }
+//    }
 
-    @GetMapping("test")
-    public String test(){
-        String testData = testService.getTestData();
-        TestModel response = new TestModel();
-        response.setData(testData);
-        return mapper.map(response, String.class);
-
-    }
+//    @GetMapping("test")
+//    public String test(){
+//        String testData = testService.getTestData();
+//        TestModel response = new TestModel();
+//        response.setData(testData);
+//        return mapper.map(response, String.class);
+//
+//    }
 
     @GetMapping("/api/userdata/{id}")
     public ResponseModel getUserById(@PathVariable("id") String id){
