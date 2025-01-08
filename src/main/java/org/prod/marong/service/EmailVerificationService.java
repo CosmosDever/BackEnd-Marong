@@ -38,7 +38,7 @@ public class EmailVerificationService {
     private static final Logger logger = LoggerFactory.getLogger(EmailVerificationService.class);
 
     public void initiateEmailVerification(String email) {
-        String token = UUID.randomUUID().toString();
+        String token = String.format("%06d", new Random().nextInt(999999));
         EmailVerificationToken verificationToken = new EmailVerificationToken(email, token, LocalDateTime.now().plusHours(24));
         tokenRepository.save(verificationToken);
 

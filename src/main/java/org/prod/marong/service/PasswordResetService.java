@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -35,7 +36,7 @@ public class PasswordResetService {
     public void initiatePasswordReset(String email) {
         Optional<UserEntity> userOpt = Optional.ofNullable(userRepository.findByGmail(email));
         if (userOpt.isPresent()) {
-            String token = UUID.randomUUID().toString();
+            String token = String.format("%06d", new Random().nextInt(999999));
             PasswordResetToken resetToken = new PasswordResetToken(email, token, LocalDateTime.now().plusHours(4));
             tokenRepository.save(resetToken);
 
