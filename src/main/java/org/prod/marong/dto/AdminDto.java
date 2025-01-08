@@ -1,7 +1,7 @@
 package org.prod.marong.dto;
 
 import lombok.Data;
-
+import java.util.List;
 @Data
 public class AdminDto {
     private Long id;
@@ -9,5 +9,4 @@ public class AdminDto {
     private String fullName;
     private String role;
 
-    // Getters and setters
 }

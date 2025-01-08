@@ -26,17 +26,19 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "telephone", nullable = false)
+    @Column(name = "telephone")
     private String telephone;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private String gender;
 
     @Column(name = "picture")
     private String picture;
 
-    @Column(name = "birthday", nullable = false)
+    @Column(name = "birthday")
     private LocalDate birthday;
+
+    private boolean emailVerified;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
