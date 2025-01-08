@@ -33,4 +33,23 @@ public class UserService {
         return userModel;
     }
 
+
+    public UserModel getProfile(String userId) {
+
+        UserEntity userData = userRepository.findByUserId(userId);
+        UserModel userModel = new UserModel();
+        userModel.setId(userData.getId());
+        userModel.setFullName(userData.getFullName());
+        userModel.setGmail(userData.getGmail());
+        userModel.setBirthday(String.valueOf(userData.getBirthday()));
+        userModel.setGender(userData.getGender());
+        userModel.setPicture(userData.getPicture());
+        userModel.setRoles(userData.getRoles().stream()
+                .map(RoleEntity::toString)
+                .collect(Collectors.joining(", ")));
+        return userModel;
+    }
+
+
+
 }
