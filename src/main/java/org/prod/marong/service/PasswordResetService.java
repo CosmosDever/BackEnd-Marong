@@ -37,14 +37,38 @@ public class PasswordResetService {
         Optional<UserEntity> userOpt = Optional.ofNullable(userRepository.findByGmail(email));
         if (userOpt.isPresent()) {
             String token = String.format("%06d", new Random().nextInt(999999));
-            PasswordResetToken resetToken = new PasswordResetToken(email, token, LocalDateTime.now().plusHours(4));
+            PasswordResetToken resetToken = new PasswordResetToken(email, token, LocalDateTime.now().plusHours(1));
             tokenRepository.save(resetToken);
 
             String subject = "Password Reset";
-            String text = "To reset your password, please use the following code: " + token;
-            emailService.sendEmail(email, subject, text);
+            String htmlContent = "<!DOCTYPE html>" +
+                    "<html>" +
+                    "<head>" +
+                    "    <style>" +
+                    "        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }" +
+                    "        .container { padding: 20px; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; }" +
+                    "        h1 { color: #4CAF50; }" +
+                    "        p { margin: 10px 0; }" +
+                    "        .token { font-size: 1.2em; font-weight: bold; color: #4CAF50; }" +
+                    "    </style>" +
+                    "</head>" +
+                    "<body>" +
+                    "    <div class='container'>" +
+                    "        <h1>Password Reset</h1>" +
+                    "        <p>Hello,</p>" +
+                    "        <p>We received a request to reset your password. Please use the code below to proceed:</p>" +
+                    "        <p class='token'>" + token + "</p>" +
+                    "        <p>This code is valid for the next 1 hours. If you did not request a password reset, please ignore this email.</p>" +
+                    "        <p>Thank you,</p>" +
+                    "        <p>Marong Team</p>" +
+                    "    </div>" +
+                    "</body>" +
+                    "</html>";
+
+            emailService.sendEmail(email, subject, htmlContent, true); // Pass 'true' to indicate HTML content
         }
     }
+
 
     public boolean verifyResetCode(String email, String token) {
         Optional<PasswordResetToken> resetTokenOpt = tokenRepository.findByEmailAndToken(email, token);

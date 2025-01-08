@@ -9,7 +9,6 @@ import org.prod.marong.model.entity.UserEntity;
 import org.prod.marong.repository.EmailVerificationTokenRepository;
 import org.prod.marong.repository.RoleRepository;
 import org.prod.marong.repository.UserRepository;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,13 +38,37 @@ public class EmailVerificationService {
 
     public void initiateEmailVerification(String email) {
         String token = String.format("%06d", new Random().nextInt(999999));
-        EmailVerificationToken verificationToken = new EmailVerificationToken(email, token, LocalDateTime.now().plusHours(24));
+        EmailVerificationToken verificationToken = new EmailVerificationToken(email, token, LocalDateTime.now().plusHours(1));
         tokenRepository.save(verificationToken);
 
         String subject = "Email Verification";
-        String text = "To verify your email, please use the following code: " + token;
-        emailService.sendEmail(email, subject, text);
+        String htmlContent = "<!DOCTYPE html>" +
+                "<html>" +
+                "<head>" +
+                "    <style>" +
+                "        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }" +
+                "        .container { padding: 20px; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; }" +
+                "        h1 { color: #4CAF50; }" +
+                "        p { margin: 10px 0; }" +
+                "        .token { font-size: 1.2em; font-weight: bold; color: #4CAF50; }" +
+                "    </style>" +
+                "</head>" +
+                "<body>" +
+                "    <div class='container'>" +
+                "        <h1>Email Verification</h1>" +
+                "        <p>Hello,</p>" +
+                "        <p>Thank you for registering. To complete your email verification, please use the code below:</p>" +
+                "        <p class='token'>" + token + "</p>" +
+                "        <p>This code is valid for the next 1 hours. If you did not register, please ignore this email.</p>" +
+                "        <p>Thank you,</p>" +
+                "        <p>Marong Team</p>" +
+                "    </div>" +
+                "</body>" +
+                "</html>";
+
+        emailService.sendEmail(email, subject, htmlContent, true); // Pass 'true' to indicate HTML content
     }
+
 
     public boolean verifyEmail(String token) {
         Optional<EmailVerificationToken> verificationTokenOpt = tokenRepository.findByToken(token);
