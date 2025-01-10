@@ -78,14 +78,14 @@ public class ReportService {
             throw new IllegalArgumentException("Report with id " + id + " not found");
         }
         String LocalDate = String.valueOf(LocalDateTime.now());
-        reportEntity.setStatus("Cancelled");
+        reportEntity.setStatus("Cancel");
         reportEntity.setUpdatedAt(LocalDateTime.parse(LocalDate));
         reportEntity.setDetailDetect(detail);
         ReportEntity report = reportRepository.save(reportEntity);
 
         ChangeStatusResponseModel reportModelResponse = new ChangeStatusResponseModel();
         reportModelResponse.setCase_id(report.getCaseId().toString());
-        reportModelResponse.setStatus("Cancelled");
+        reportModelResponse.setStatus("Cancel");
         reportModelResponse.setDetail(detail);
         reportModelResponse.setDate_updated(LocalDate);
 

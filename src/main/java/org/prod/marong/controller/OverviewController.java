@@ -1,8 +1,6 @@
 package org.prod.marong.controller;
 
-import org.prod.marong.model.ChangeStatusResponseModel;
-import org.prod.marong.model.OverviewModel;
-import org.prod.marong.model.ResponseModel;
+import org.prod.marong.model.*;
 import org.prod.marong.model.entity.ReportJoinCaseEntity;
 import org.prod.marong.service.overview.OverviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +108,40 @@ public class OverviewController {
     public ResponseModel AllOverviewTest(){
         try {
             List<ReportJoinCaseEntity> response = overviewService.getAllOverviewTest();
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("All data retrieved successfully")
+                    .data(response)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("Error retrieving data: " + e.getMessage())
+                    .build();
+        }
+    }
+
+    @GetMapping("/api/dashboard/{id}/allcase")
+    public ResponseModel DashboardAllCase(@PathVariable("id") String id){
+        try {
+            DashboardModel response = overviewService.getDashboardAllCase(id);
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("All data retrieved successfully")
+                    .data(response)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("Error retrieving data: " + e.getMessage())
+                    .build();
+        }
+    }
+
+    @GetMapping("/api/dashboard/{id}/allstatuscase")
+    public ResponseModel DashboardAllStatus(@PathVariable("id") String id){
+        try {
+            DashboardStatusModel response = overviewService.getDashboardAllStatusCase(id);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")

@@ -1,8 +1,10 @@
 package org.prod.marong.controller;
 
+import org.prod.marong.model.MyReportCaseModel;
 import org.prod.marong.model.MyReportResponseModel;
 import org.prod.marong.model.NewsModel;
 import org.prod.marong.model.ResponseModel;
+import org.prod.marong.model.entity.ReportEntity;
 import org.prod.marong.model.entity.ReportJoinCaseEntity;
 import org.prod.marong.service.cases.CaseService;
 import org.prod.marong.service.myreport.MyReportService;
@@ -77,6 +79,23 @@ public class MyReportController {
     public ResponseModel getAllReportCancelById(@PathVariable("id") String id){
         try {
             List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id,"cancel");
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("All data retrieved successfully")
+                    .data(data)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("Error retrieving data: " + e.getMessage())
+                    .build();
+        }
+    }
+
+    @GetMapping("/api/myreport/{id}/case/{caseid}")
+    public ResponseModel getAllReportCancelById(@PathVariable("id") String id,@PathVariable("caseid") String caseid){
+        try {
+            MyReportCaseModel data = myReportService.getReportByUserIdCaseId(id,caseid);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")

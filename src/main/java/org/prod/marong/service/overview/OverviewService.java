@@ -1,13 +1,13 @@
 package org.prod.marong.service.overview;
 
-import org.prod.marong.model.OverviewMap;
-import org.prod.marong.model.OverviewModel;
+import org.prod.marong.model.*;
 import org.prod.marong.model.entity.ReportJoinCaseEntity;
 import org.prod.marong.repository.ReportJoinCaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +92,7 @@ public class OverviewService {
                 case "Done":
                     done++;
                     break;
-                case "closed":
+                case "Cancel":
                     cancel++;
                     break;
                 default:
@@ -139,7 +139,7 @@ public class OverviewService {
                 case "Done":
                     done++;
                     break;
-                case "closed":
+                case "Cancel":
                     cancel++;
                     break;
                 default:
@@ -186,7 +186,7 @@ public class OverviewService {
                 case "Done":
                     done++;
                     break;
-                case "closed":
+                case "Cancel":
                     cancel++;
                     break;
                 default:
@@ -233,7 +233,7 @@ public class OverviewService {
                 case "Done":
                     done++;
                     break;
-                case "closed":
+                case "Cancel":
                     cancel++;
                     break;
                 default:
@@ -258,6 +258,134 @@ public class OverviewService {
         return dataOverview;
     }
 
+    public DashboardStatusModel getDashboardAllStatusCase(String id){
+        List<ReportJoinCaseEntity> allFromDb = reportJoinCaseRepository.findReportJoinCaseByUserId(id);
+        int inProgress = 0;
+        int waiting = 0;
+        int done = 0;
+        int cancel = 0;
 
+        for (ReportJoinCaseEntity reportCase : allFromDb) {
+            String status = reportCase.getStatus();
+
+            switch (status) {
+                case "InProgress":
+                    inProgress++;
+                    break;
+                case "Waiting":
+                    waiting++;
+                    break;
+                case "Done":
+                    done++;
+                    break;
+                case "Cancel":
+                    cancel++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        Integer AllSumStatus =  inProgress+waiting+done+cancel;
+        DashboardStatusModel dashboardData = new DashboardStatusModel();
+        dashboardData.setTotal_cases(String.valueOf(AllSumStatus));
+
+        List<String> casesString = new ArrayList<>();
+        casesString.add("waiting");
+        casesString.add("in progress");
+        casesString.add("done");
+        casesString.add("cancel");
+        List<StatusDashboardModel> AllCases = new ArrayList<>();
+        for (String string : casesString){
+            StatusDashboardModel cases = new StatusDashboardModel();
+            cases.setStatus(string);
+            if (string.equals("Waiting")){
+                cases.setCount(waiting);
+                cases.setPercent((waiting/AllSumStatus)*100);
+            }
+            if (string.equals("InProgress")){
+                cases.setCount(inProgress);
+                cases.setPercent((inProgress/AllSumStatus)*100);
+            }
+            if (string.equals("Done")){
+                cases.setCount(done);
+                cases.setPercent((done/AllSumStatus)*100);
+            }
+            if (string.equals("Cancel")){
+                cases.setCount(cancel);
+                cases.setPercent((cancel/AllSumStatus)*100);
+            }
+            AllCases.add(cases);
+        }
+        dashboardData.setCases(AllCases);
+
+
+
+        return dashboardData;
+    }
+
+    public DashboardModel getDashboardAllCase(String id){
+        List<ReportJoinCaseEntity> allFromDb = reportJoinCaseRepository.findReportJoinCaseByUserId(id);
+        int road = 0;
+        int pavement = 0;
+        int overpass = 0;
+        int wire = 0;
+
+        for (ReportJoinCaseEntity reportCase : allFromDb) {
+            String status = reportCase.getStatus();
+
+            switch (status) {
+                case "road":
+                    road++;
+                    break;
+                case "pavement":
+                    pavement++;
+                    break;
+                case "overpass":
+                    overpass++;
+                    break;
+                case "wire":
+                    wire++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        Integer AllSumStatus =  road+pavement+overpass+wire;
+        DashboardModel dashboardData = new DashboardModel();
+        dashboardData.setTotal_cases(String.valueOf(AllSumStatus));
+
+        List<String> casesString = new ArrayList<>();
+        casesString.add("pavement");
+        casesString.add("road");
+        casesString.add("done");
+        casesString.add("cancel");
+        List<CasesDashboardModel> AllCases = new ArrayList<>();
+        for (String string : casesString){
+            CasesDashboardModel cases = new CasesDashboardModel();
+            cases.setType_of_issues(string);
+            if (string.equals("pavement")){
+                cases.setCount(pavement);
+                cases.setPercent((pavement/AllSumStatus)*100);
+            }
+            if (string.equals("road")){
+                cases.setCount(road);
+                cases.setPercent((road/AllSumStatus)*100);
+            }
+            if (string.equals("overpass")){
+                cases.setCount(overpass);
+                cases.setPercent((overpass/AllSumStatus)*100);
+            }
+            if (string.equals("wire")){
+                cases.setCount(wire);
+                cases.setPercent((wire/AllSumStatus)*100);
+            }
+            AllCases.add(cases);
+        }
+        dashboardData.setCases(AllCases);
+
+
+
+        return dashboardData;
+    }
 
 }
