@@ -19,4 +19,7 @@ public interface ReportRepository extends JpaRepository<ReportEntity, Long> {
     @Query("SELECT r.status FROM ReportEntity r")
     List<String> findReportStatus();
 
+//    @Query("SELECT n FROM ReportEntity n WHERE n.userId = :id")
+
+
 }

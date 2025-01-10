@@ -31,4 +31,7 @@ public class CasesEntity {
     @Column(name = "detail")
     private String detail;
 
+    @Column(name = "picture_done")
+    private String picture_done;
+
 }

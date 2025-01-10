@@ -104,7 +104,7 @@ public class NewsController {
         }
     }
 
-    @PostMapping("/api/News/{id}/Edit")
+    @PatchMapping("/api/News/{id}/Edit")
     public ResponseModel editNews( @PathVariable("id") String id,
                                    @RequestParam("title") String title,
                                    @RequestParam("content") String content,

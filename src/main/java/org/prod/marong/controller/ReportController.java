@@ -2,6 +2,7 @@ package org.prod.marong.controller;
 
 import org.apache.coyote.Response;
 import org.prod.marong.model.CasesModel;
+import org.prod.marong.model.ChangeStatusDoneResponseModel;
 import org.prod.marong.model.ChangeStatusResponseModel;
 import org.prod.marong.model.ResponseModel;
 import org.prod.marong.service.Report.ReportService;
@@ -41,6 +42,24 @@ public class ReportController {
                                           @RequestParam("detail") String detail){
         try {
             ChangeStatusResponseModel response = reportService.updateCaseStatusCancel(id,detail);
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("All data retrieved successfully")
+                    .data(response)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("Error retrieving data: " + e.getMessage())
+                    .build();
+        }
+    }
+
+    @PostMapping("/api/case/{id}/changeStatus/done")
+    public ResponseModel changeDone(@PathVariable("id") String id,
+                                          @RequestParam("picture") String picture){
+        try {
+            ChangeStatusDoneResponseModel response = reportService.updateCaseStatusDone(id,picture);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
