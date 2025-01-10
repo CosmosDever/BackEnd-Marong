@@ -2,10 +2,11 @@ package org.prod.marong.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
+import java.util.List;
 @Entity
 @Table(name = "roles")
 @Data
+
 public class RoleEntity {
 
     @Id
@@ -15,4 +16,5 @@ public class RoleEntity {
 
     @Column(name = "role_name", nullable = false, unique = true)
     private String name;
+
 }

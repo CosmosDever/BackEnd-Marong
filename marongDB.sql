@@ -14,8 +14,9 @@ CREATE TABLE users (
 -- Insert Mock Data for Users
 INSERT INTO users (gmail, full_name, birthday, telephone, gender, password, picture)
 VALUES
-    ('john.doe@example.com', 'John Doe', '1990-01-01 00:00:00', '0849874867', 'Male', 'hashed_password_1', 'http://example.com/john.jpg'),
-    ('jane.smith@example.com', 'Jane Smith', '1992-02-02 00:00:00', '0984783758', 'Female', 'hashed_password_2', 'http://example.com/jane.jpg');
+    ('admin@example.com', 'John Doe', '1990-01-01 00:00:00', '0849874867', 'Male', '$2a$10$WWIIXVeEp84wH8RqbM0Z1.jycfkQOaEnkA/U1SUIVZDJ0258lHa2e', 'http://example.com/john.jpg'),
+    ('User@example.com', 'Jane Smith', '1992-02-02 00:00:00', '0984783758', 'Female', '$2a$10$acpqGHt9lC1C.zvmohlyo.ZAjLHerzte0zcpowUHDtpwKBDHzNU8y', 'http://example.com/jane.jpg'),
+    ('msaidmin@gmail.com', 'Master Admin', '1992-02-02 00:00:00', '0984783758','Male', '$2a$10$ZRCWxcMW1egzmMq66ggkwe7UwTVApaql9AkuL3GdaUp8ZBykzWoLi', 'http://example.com/jane.jpg');
 
 -- Create Cases Table
 CREATE TABLE cases (
@@ -89,15 +90,16 @@ CREATE TABLE email_verifications (
 );
 
 -- Insert Mock Data for Email Verifications
-INSERT INTO email_verifications (user_id, token, expires_at)
+INSERT INTO email_verifications (token, expires_at)
 VALUES
-    (1, 'verification_token_1', '2024-01-01 23:59:59'),
-    (2, 'verification_token_2', '2024-02-01 23:59:59');
+    ('verification_token_1', '2024-01-01 23:59:59'),
+    ('verification_token_2', '2024-02-01 23:59:59');
 
 -- Create Password Resets Table
 CREATE TABLE password_resets (
                                  id INT AUTO_INCREMENT PRIMARY KEY,
-                                 user_id INT NOT NULL,
+                                 user_id INT NOT NULL ,
+                                 email VARCHAR(255) NOT NULL,
                                  token VARCHAR(255) NOT NULL UNIQUE,
                                  created_at DATETIME DEFAULT NOW(),
                                  expires_at DATETIME NOT NULL,
@@ -107,8 +109,8 @@ CREATE TABLE password_resets (
 -- Insert Mock Data for Password Resets
 INSERT INTO password_resets (user_id, token, expires_at)
 VALUES
-    (1, 'password_reset_token_1', '2024-01-01 23:59:59'),
-    (2, 'password_reset_token_2', '2024-02-01 23:59:59');
+    ('user1@example.com', 'password_reset_token_1', '2024-01-01 23:59:59'),
+    ('user2@example.com', 'password_reset_token_2', '2024-02-01 23:59:59');
 
 -- Create Roles Table
 CREATE TABLE roles (
@@ -120,9 +122,9 @@ CREATE TABLE roles (
 -- Insert Mock Data for Roles
 INSERT INTO roles (role_name, description)
 VALUES
-    ('Admin', 'Administrator with Admin access'),
-    ('User', 'Regular user with limited access'),
-    ('master Admin','Administrator with full access')
+    ('ROLE_Admin', 'Administrator with Admin access'),
+    ('ROLE_User', 'Regular user with limited access'),
+    ('ROLE_master Admin','Administrator with full access')
     ;
 
 -- Create User Roles Table
@@ -138,33 +140,8 @@ CREATE TABLE user_roles (
 INSERT INTO user_roles (user_id, role_id)
 VALUES
     (1, 1),  -- John Doe as Admin
-    (2, 2);  -- Jane Smith as User
+    (2, 2),  -- Jane Smith as User
+    (3, 3);  -- Master Admin
 
--- Create Permissions Table
-CREATE TABLE permissions (
-                             id INT AUTO_INCREMENT PRIMARY KEY,
-                             permission_name VARCHAR(255) NOT NULL UNIQUE,
-                             description VARCHAR(255)
-);
 
--- Insert Mock Data for Permissions
-INSERT INTO permissions (permission_name, description)
-VALUES
-    ('view_reports', 'Permission to view reports'),
-    ('edit_reports', 'Permission to edit reports');
-
--- Create Role Permissions Table
-CREATE TABLE role_permissions (
-                                  role_id INT NOT NULL,
-                                  permission_id INT NOT NULL,
-                                  PRIMARY KEY (role_id, permission_id),
-                                  FOREIGN KEY (role_id) REFERENCES roles(id),
-                                  FOREIGN KEY (permission_id) REFERENCES permissions(id)
-);
-
--- Insert Mock Data for Role Permissions
-INSERT INTO role_permissions (role_id, permission_id)
-VALUES
-    (1, 1),  -- Admin can view reports
-    (1, 2);  -- Admin can edit reports
 
