@@ -5,6 +5,7 @@ import org.prod.marong.model.NewsModel;
 import org.prod.marong.model.ResponseModel;
 import org.prod.marong.service.cases.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class CaseController {
     CaseService caseService;
 
     @GetMapping("/api/case/all")
+    @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
     public ResponseModel getAllCase(){
         try {
             List<CasesModel> caseList = caseService.getAllCaseWithStatus();

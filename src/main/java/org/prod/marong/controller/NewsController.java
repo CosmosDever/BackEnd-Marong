@@ -10,6 +10,7 @@ import org.prod.marong.model.entity.NewsEntity;
 import org.prod.marong.service.TestService;
 import org.prod.marong.service.news.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -66,6 +67,7 @@ public class NewsController {
     }
 
     @PostMapping("/api/News/addNews")
+    @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
     public ResponseModel addNews( @RequestParam("title") String title,
                                   @RequestParam("content") String content,
                                   @RequestParam("location") String location,
@@ -88,6 +90,7 @@ public class NewsController {
     }
 
     @DeleteMapping("/api/News/{id}/Delete")
+    @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
     public ResponseModel deleteNews(@PathVariable("id") String id){
         try {
             NewsEntity newsList = newsService.deleteNewsById(id);
@@ -105,6 +108,7 @@ public class NewsController {
     }
 
     @PatchMapping("/api/News/{id}/Edit")
+    @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
     public ResponseModel editNews( @PathVariable("id") String id,
                                    @RequestParam("title") String title,
                                    @RequestParam("content") String content,

@@ -7,6 +7,7 @@ import org.prod.marong.model.ChangeStatusResponseModel;
 import org.prod.marong.model.ResponseModel;
 import org.prod.marong.service.Report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ReportController {
     ReportService reportService;
 
     @PostMapping("/api/case/{id}/changeStatus/inprogress")
+    @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
     public ResponseModel changeInprogress(@PathVariable("id") String id){
         try {
             ChangeStatusResponseModel response = reportService.updateCaseStatusInprogress(id);
@@ -38,6 +40,8 @@ public class ReportController {
     }
 
     @PostMapping("/api/case/{id}/changeStatus/cancelCase")
+    @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
+
     public ResponseModel changeCancelCase(@PathVariable("id") String id,
                                           @RequestParam("detail") String detail){
         try {
@@ -56,6 +60,8 @@ public class ReportController {
     }
 
     @PostMapping("/api/case/{id}/changeStatus/done")
+    @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
+
     public ResponseModel changeDone(@PathVariable("id") String id,
                                           @RequestParam("picture") String picture){
         try {
