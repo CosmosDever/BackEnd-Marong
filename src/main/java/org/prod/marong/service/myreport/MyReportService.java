@@ -1,6 +1,7 @@
 package org.prod.marong.service.myreport;
 
 import org.prod.marong.model.CasesModel;
+import org.prod.marong.model.LocationModel;
 import org.prod.marong.model.MyReportCaseModel;
 import org.prod.marong.model.MyReportResponseModel;
 import org.prod.marong.model.entity.CasesEntity;
@@ -23,11 +24,16 @@ public class MyReportService {
 
         List<MyReportResponseModel> myReportList = allCases.stream().map(entity -> {
             MyReportResponseModel model = new MyReportResponseModel();
+            LocationModel location = new LocationModel();
+            String[] coordinates = new String[2];
+            coordinates[0] = entity.getCases().getLatitude();
+            coordinates[1] = entity.getCases().getLongitude();
+            location.setCoordinates(coordinates);
             model.setCase_id(id);
             model.setType_of_issue(entity.getDetailDetect());
             model.setDate_report(String.valueOf(entity.getUpdatedAt()));
             model.setStatus(entity.getStatus());
-            model.setLocation(entity.getCases().getLocation());
+            model.setLocation(location);
             return model;
         }).collect(Collectors.toList());
 
@@ -40,9 +46,14 @@ public class MyReportService {
 //        ReportJoinCaseEntity caseById = reportJoinCaseRepository.findReportJoinCaseEntityByUserIdAndCaseId(id,caseid);
 
         MyReportCaseModel model = new MyReportCaseModel();
+        LocationModel location = new LocationModel();
+        String[] coordinates = new String[2];
+        coordinates[0] = caseById.getCases().getLatitude();
+        coordinates[1] = caseById.getCases().getLongitude();
+        location.setCoordinates(coordinates);
         model.setId(String.valueOf(caseById.getId()));
         model.setType_of_issue(caseById.getCategory());
-        model.setLocation(caseById.getCases().getLocation());
+        model.setLocation(location);
         model.setPicture(caseById.getCases().getPicture());
         model.setDetail(caseById.getDetailDetect());
         model.setDamage_value(caseById.getDamageValue());

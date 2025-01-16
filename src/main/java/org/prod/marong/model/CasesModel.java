@@ -10,7 +10,7 @@ public class CasesModel {
     private String category;
     private String detail;
     private String picture;
-    private String location;
+    private LocationModel location;
     private LocalDate dateOpened;
     private LocalDate dateClosed;
     private String reportStatus;

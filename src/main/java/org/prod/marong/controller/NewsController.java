@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 @RestController
 public class NewsController {
 
@@ -70,11 +70,13 @@ public class NewsController {
     @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
     public ResponseModel addNews( @RequestParam("title") String title,
                                   @RequestParam("content") String content,
-                                  @RequestParam("location") String location,
+                                  @RequestParam("location_description") String location,
+                                  @RequestParam("latitude") String latitude,
+                                  @RequestParam("longitude") String longitude,
                                   @RequestParam("type") String type,
                                   @RequestParam("picture") String picture ){
         try {
-            NewsEntity newsList = newsService.addNews(title, content, location, type, picture);
+            NewsEntity newsList = newsService.addNews(title, content, location, type, picture,longitude,latitude);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
@@ -112,12 +114,14 @@ public class NewsController {
     public ResponseModel editNews( @PathVariable("id") String id,
                                    @RequestParam("title") String title,
                                    @RequestParam("content") String content,
-                                   @RequestParam("location") String location,
+                                   @RequestParam("location_description") String location,
+                                   @RequestParam("latitude") String latitude,
+                                   @RequestParam("longitude") String longitude,
                                    @RequestParam("type") String type,
                                    @RequestParam("picture") String picture
                                    ){
         try {
-            NewsResponseModel newsList = newsService.editNewsById(id,title, content, location, type, picture);
+            NewsResponseModel newsList = newsService.editNewsById(id,title, content, location, type, picture,longitude,latitude);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")

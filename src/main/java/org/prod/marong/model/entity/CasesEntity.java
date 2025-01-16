@@ -19,8 +19,14 @@ public class CasesEntity {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "location")
-    private String location;
+    @Column(name = "location_description")
+    private String location_description;
+
+    @Column(name = "latitude")
+    private String latitude;
+
+    @Column(name = "longitude")
+    private String longitude;
 
     @Column(name = "date_opened")
     private LocalDate date_opened;
