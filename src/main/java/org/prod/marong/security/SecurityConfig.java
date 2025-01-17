@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -44,7 +45,10 @@ public class SecurityConfig {
             .requestMatchers("/api/overview/**").hasAnyRole("master Admin", "Admin")
             .anyRequest().authenticated()
             .and()
+            .cors(withDefaults())
             .httpBasic();
+
+
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
