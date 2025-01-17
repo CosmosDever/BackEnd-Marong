@@ -1,18 +1,12 @@
 package org.prod.marong.controller;
 
-import org.prod.marong.model.MyReportCaseModel;
-import org.prod.marong.model.MyReportResponseModel;
-import org.prod.marong.model.NewsModel;
-import org.prod.marong.model.ResponseModel;
+import org.prod.marong.model.*;
 import org.prod.marong.model.entity.ReportEntity;
 import org.prod.marong.model.entity.ReportJoinCaseEntity;
 import org.prod.marong.service.cases.CaseService;
 import org.prod.marong.service.myreport.MyReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -109,5 +103,27 @@ public class MyReportController {
         }
     }
 
+    @PostMapping("/api/myreport/{id}/addCase")
+    public ResponseModel createCase(@PathVariable("id") String id,
+                               @RequestParam("category") String category,
+                               @RequestParam("latitude") String latitude,
+                               @RequestParam("longitude") String longitude,
+                               @RequestParam("picture") String picture,
+                               @RequestParam("detail") String detail,
+                                    @RequestParam("location_detail") String location_detail) {
+        try {
+            ReportCaseResponseModel data = myReportService.createCase(id,category,latitude,location_detail,longitude,picture,detail)
+            return ResponseModel.builder()
+                    .statusCode(SUCCESS)
+                    .statusMessage("New case added successfully.")
+                    .data(data)
+                    .build();
+        } catch (Exception e) {
+            return ResponseModel.builder()
+                    .statusCode(ERROR)
+                    .statusMessage("Error retrieving data: " + e.getMessage())
+                    .build();
+        }
+    }
 
 }

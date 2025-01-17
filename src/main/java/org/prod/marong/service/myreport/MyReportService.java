@@ -1,15 +1,15 @@
 package org.prod.marong.service.myreport;
 
-import org.prod.marong.model.CasesModel;
-import org.prod.marong.model.LocationModel;
-import org.prod.marong.model.MyReportCaseModel;
-import org.prod.marong.model.MyReportResponseModel;
+import org.prod.marong.model.*;
 import org.prod.marong.model.entity.CasesEntity;
 import org.prod.marong.model.entity.ReportJoinCaseEntity;
 import org.prod.marong.repository.ReportJoinCaseRepository;
+import org.prod.marong.repository.ReportJoinCaseUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +18,8 @@ public class MyReportService {
 
     @Autowired
     ReportJoinCaseRepository reportJoinCaseRepository;
+    @Autowired
+    private ReportJoinCaseUserRepository reportJoinCaseUserRepository;
 
     public List<MyReportResponseModel> getAllReportJoinCase(String id, String status) {
         List<ReportJoinCaseEntity> allCases = reportJoinCaseRepository.findReportJoinCaseById(id, status);
@@ -64,5 +66,30 @@ public class MyReportService {
         return model;
 
 
+    }
+
+    public ReportCaseResponseModel createCase(String id, String category, String latitude, String longitude, String location_detail, String detail, String picture) {
+        LocationModel location = new LocationModel();
+        String[] coordinates = new String[2];
+        coordinates[0] = latitude;
+        coordinates[1] = longitude;
+        location.setCoordinates(coordinates);
+        CasesEntity reportCase = new CasesEntity();
+        reportCase.setLongitude(longitude);
+        reportCase.setLatitude(latitude);
+        reportCase.setDetail(detail);
+        reportCase.setDate_opened(LocalDate.from(LocalDateTime.now()));
+        reportCase.setLocation_description(location_detail);
+        reportCase.setPicture(picture);
+
+        ReportCaseResponseModel response = new ReportCaseResponseModel();
+        response.setCaseId(1L);
+        response.setDetail("");
+        response.setDate_opened("");
+        response.setPicture("");
+        response.setCategory("");
+        response.setLocation(location);
+        response.setStatus("waiting");
+        return response;
     }
 }
