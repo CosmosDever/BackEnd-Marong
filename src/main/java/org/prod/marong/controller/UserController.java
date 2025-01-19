@@ -6,6 +6,7 @@ import org.prod.marong.model.UserModel;
 import org.prod.marong.service.TestService;
 import org.prod.marong.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -47,7 +48,7 @@ public class UserController {
     @GetMapping("/api/userdata/{token}")
     public ResponseModel getUserByToken(@PathVariable("token") String token){
         try {
-            UserModel userData = userService.getUserDataByToken(token);
+            UserDetails userData = userService.getUserDataByToken(token);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("User data retrieved successfully")
