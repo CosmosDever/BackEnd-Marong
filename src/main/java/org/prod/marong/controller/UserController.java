@@ -45,10 +45,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/api/userdata/token/{token}")
+    @GetMapping("/api/userdata/token{token}")
     public ResponseModel getUserByToken(@PathVariable("token") String token){
         try {
-            UserDetails userData = userService.getUserDataByToken(token);
+            UserModel userData = userService.getUserDataByToken(token);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("User data retrieved successfully")
