@@ -42,7 +42,7 @@ public class CaseController {
 
     @GetMapping("/api/case/{id}")
     @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
-    public ResponseModel getAllCase(@PathVariable("id") String id){
+    public ResponseModel getCaseById(@PathVariable("id") String id){
         try {
             CasesByIdModel caseById = caseService.getCaseById(id);
             return ResponseModel.builder()

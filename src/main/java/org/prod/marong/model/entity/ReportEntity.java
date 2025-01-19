@@ -1,10 +1,9 @@
 package org.prod.marong.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "reports")

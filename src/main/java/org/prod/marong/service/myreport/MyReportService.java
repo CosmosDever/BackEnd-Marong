@@ -2,9 +2,13 @@ package org.prod.marong.service.myreport;
 
 import org.prod.marong.model.*;
 import org.prod.marong.model.entity.CasesEntity;
+import org.prod.marong.model.entity.NewsEntity;
+import org.prod.marong.model.entity.ReportEntity;
 import org.prod.marong.model.entity.ReportJoinCaseEntity;
+import org.prod.marong.repository.CaseRepository;
 import org.prod.marong.repository.ReportJoinCaseRepository;
 import org.prod.marong.repository.ReportJoinCaseUserRepository;
+import org.prod.marong.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +23,9 @@ public class MyReportService {
     @Autowired
     ReportJoinCaseRepository reportJoinCaseRepository;
     @Autowired
-    private ReportJoinCaseUserRepository reportJoinCaseUserRepository;
+    private CaseRepository caseRepository;
+    @Autowired
+    private ReportRepository reportRepository;
 
     public List<MyReportResponseModel> getAllReportJoinCase(String id, String status) {
         List<ReportJoinCaseEntity> allCases = reportJoinCaseRepository.findReportJoinCaseById(id, status);
@@ -74,22 +80,42 @@ public class MyReportService {
         coordinates[0] = latitude;
         coordinates[1] = longitude;
         location.setCoordinates(coordinates);
-        CasesEntity reportCase = new CasesEntity();
-        reportCase.setLongitude(longitude);
-        reportCase.setLatitude(latitude);
-        reportCase.setDetail(detail);
-        reportCase.setDate_opened(LocalDate.from(LocalDateTime.now()));
-        reportCase.setLocation_description(location_detail);
-        reportCase.setPicture(picture);
+        CasesEntity newCase = new CasesEntity();
+        newCase.setCategory(category);
+        newCase.setDetail(detail);
+        newCase.setPicture(picture);
+        newCase.setLocation_description(location_detail);
+        newCase.setLatitude(latitude);
+        newCase.setLongitude(longitude);
+        newCase.setDate_opened(LocalDate.now());
+
+
+        // Save the case entity
+        CasesEntity savedCase = caseRepository.save(newCase);
+
+        // Optionally, you can also create a report for this case
+        ReportEntity newReport = new ReportEntity();
+        newReport.setStatus("pending");
+        newReport.setCategory(category);
+        newReport.setCaseId(Math.toIntExact(savedCase.getId()));
+        newReport.setUserId(Integer.valueOf(id));
+        newReport.setCreatedAt(LocalDateTime.now());
+        System.out.println(newCase);
+        System.out.println(newReport);
+        ReportEntity report = reportRepository.save(newReport);
+
+
 
         ReportCaseResponseModel response = new ReportCaseResponseModel();
         response.setCaseId(1L);
-        response.setDetail("");
-        response.setDate_opened("");
-        response.setPicture("");
-        response.setCategory("");
+        response.setDetail(detail);
+        response.setDate_opened(String.valueOf(LocalDate.now()));
+        response.setPicture(picture);
+        response.setCategory(category);
         response.setLocation(location);
+        response.setDetail(detail);
         response.setStatus("waiting");
         return response;
     }
+
 }

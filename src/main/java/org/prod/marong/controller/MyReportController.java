@@ -21,9 +21,9 @@ public class MyReportController {
     MyReportService myReportService;
 
     @GetMapping("/api/myreport/{id}/waiting")
-    public ResponseModel getAllReportWaitingById(@PathVariable("id") String id){
+    public ResponseModel getAllReportWaitingById(@PathVariable("id") String id) {
         try {
-            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id,"waiting");
+            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id, "waiting");
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
@@ -36,10 +36,11 @@ public class MyReportController {
                     .build();
         }
     }
+
     @GetMapping("/api/myreport/{id}/inprogress")
-    public ResponseModel getAllReportInprogressById(@PathVariable("id") String id){
+    public ResponseModel getAllReportInprogressById(@PathVariable("id") String id) {
         try {
-            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id,"inprogress");
+            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id, "inprogress");
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
@@ -52,10 +53,11 @@ public class MyReportController {
                     .build();
         }
     }
+
     @GetMapping("/api/myreport/{id}/done")
-    public ResponseModel getAllReportDoneById(@PathVariable("id") String id){
+    public ResponseModel getAllReportDoneById(@PathVariable("id") String id) {
         try {
-            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id,"done");
+            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id, "done");
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
@@ -70,9 +72,9 @@ public class MyReportController {
     }
 
     @GetMapping("/api/myreport/{id}/cancel")
-    public ResponseModel getAllReportCancelById(@PathVariable("id") String id){
+    public ResponseModel getAllReportCancelById(@PathVariable("id") String id) {
         try {
-            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id,"cancel");
+            List<MyReportResponseModel> data = myReportService.getAllReportJoinCase(id, "cancel");
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
@@ -87,9 +89,9 @@ public class MyReportController {
     }
 
     @GetMapping("/api/myreport/{id}/case/{caseid}")
-    public ResponseModel getAllReportCancelById(@PathVariable("id") String id,@PathVariable("caseid") String caseid){
+    public ResponseModel getAllReportCancelById(@PathVariable("id") String id, @PathVariable("caseid") String caseid) {
         try {
-            MyReportCaseModel data = myReportService.getReportByUserIdCaseId(id,caseid);
+            MyReportCaseModel data = myReportService.getReportByUserIdCaseId(id, caseid);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")
@@ -105,14 +107,14 @@ public class MyReportController {
 
     @PostMapping("/api/myreport/{id}/addCase")
     public ResponseModel createCase(@PathVariable("id") String id,
-                               @RequestParam("category") String category,
-                               @RequestParam("latitude") String latitude,
-                               @RequestParam("longitude") String longitude,
-                               @RequestParam("picture") String picture,
-                               @RequestParam("detail") String detail,
+                                    @RequestParam("category") String category,
+                                    @RequestParam("latitude") String latitude,
+                                    @RequestParam("longitude") String longitude,
+                                    @RequestParam("picture") String picture,
+                                    @RequestParam("detail") String detail,
                                     @RequestParam("location_detail") String location_detail) {
         try {
-            ReportCaseResponseModel data = myReportService.createCase(id,category,latitude,location_detail,longitude,picture,detail)
+            ReportCaseResponseModel data = myReportService.createCase(id, category, latitude, location_detail, longitude, picture, detail);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("New case added successfully.")
