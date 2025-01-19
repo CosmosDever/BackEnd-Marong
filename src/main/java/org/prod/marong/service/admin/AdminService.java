@@ -95,6 +95,7 @@ public class AdminService {
         user.setFullName(adminDetailDto.getFullName());
         user.setGmail(adminDetailDto.getGmail());
         user.setPassword(passwordEncoder.encode(adminDetailDto.getPassword()));
+        user.setPicture(adminDetailDto.getPicture());
         RoleEntity role = roleRepository.findByName("ROLE_" + adminDetailDto.getRole())
                 .orElseThrow(() -> new RuntimeException("Role not found: " + adminDetailDto.getRole()));
         user.setRoles(List.of(role));

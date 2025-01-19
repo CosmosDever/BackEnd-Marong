@@ -93,11 +93,6 @@ CREATE TABLE email_verifications (
                                      FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Insert Mock Data for Email Verifications
-INSERT INTO email_verifications (token, expires_at)
-VALUES
-    ('verification_token_1', '2024-01-01 23:59:59'),
-    ('verification_token_2', '2024-02-01 23:59:59');
 
 -- Create Password Resets Table
 CREATE TABLE password_resets (
@@ -110,26 +105,21 @@ CREATE TABLE password_resets (
                                  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Insert Mock Data for Password Resets
-INSERT INTO password_resets (user_id, token, expires_at)
-VALUES
-    ('user1@example.com', 'password_reset_token_1', '2024-01-01 23:59:59'),
-    ('user2@example.com', 'password_reset_token_2', '2024-02-01 23:59:59');
 
 -- Create Roles Table
 CREATE TABLE roles (
                        id INT AUTO_INCREMENT  PRIMARY KEY,
-                       role_name VARCHAR(255) NOT NULL UNIQUE,
-                       description VARCHAR(255)
+                       role_name VARCHAR(255) NOT NULL UNIQUE
+                      
 );
 
 -- Insert Mock Data for Roles
-INSERT INTO roles (role_name, description)
+INSERT INTO roles (role_name)
 VALUES
-    ('ROLE_Admin', 'Administrator with Admin access'),
-    ('ROLE_User', 'Regular user with limited access'),
-    ('ROLE_master Admin','Administrator with full access')
-    ;
+    ('ROLE_Admin'),
+    ('ROLE_User'),
+    ('ROLE_master Admin');
+
 
 -- Create User Roles Table
 CREATE TABLE user_roles (
