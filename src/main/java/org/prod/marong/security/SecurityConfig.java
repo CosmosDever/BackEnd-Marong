@@ -41,7 +41,6 @@ public class SecurityConfig {
             .and()
             .authorizeRequests()
             .requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers("/api/admin/**").hasAnyRole("master Admin", "Admin")
             .requestMatchers("/api/overview/**").hasAnyRole("master Admin", "Admin")
             .anyRequest().authenticated()
             .and()
