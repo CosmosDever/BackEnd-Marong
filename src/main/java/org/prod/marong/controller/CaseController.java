@@ -1,9 +1,6 @@
 package org.prod.marong.controller;
 
-import org.prod.marong.model.CasesByIdModel;
-import org.prod.marong.model.CasesModel;
-import org.prod.marong.model.NewsModel;
-import org.prod.marong.model.ResponseModel;
+import org.prod.marong.model.*;
 import org.prod.marong.model.entity.ReportJoinCaseUserEntity;
 import org.prod.marong.service.cases.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,7 @@ public class CaseController {
     @PreAuthorize("hasRole('ROLE_Admin') or hasRole('ROLE_master Admin')")
     public ResponseModel getAllCase(){
         try {
-            List<CasesModel> caseList = caseService.getAllCaseWithStatus();
+            List<AllCasesModel> caseList = caseService.getAllCase();
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("All data retrieved successfully")

@@ -12,4 +12,6 @@ public interface ReportJoinCaseUserRepository extends JpaRepository<ReportJoinCa
     ReportJoinCaseUserEntity findReportJoinCaseUserById(String id);
 
 
+
+
 }

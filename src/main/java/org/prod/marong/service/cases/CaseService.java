@@ -3,11 +3,9 @@ package org.prod.marong.service.cases;
 import org.prod.marong.model.*;
 import org.prod.marong.model.entity.CasesEntity;
 import org.prod.marong.model.entity.NewsEntity;
+import org.prod.marong.model.entity.ReportJoinCaseEntity;
 import org.prod.marong.model.entity.ReportJoinCaseUserEntity;
-import org.prod.marong.repository.CaseRepository;
-import org.prod.marong.repository.NewsRepository;
-import org.prod.marong.repository.ReportJoinCaseUserRepository;
-import org.prod.marong.repository.ReportRepository;
+import org.prod.marong.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +23,8 @@ public class CaseService {
 
     @Autowired
     private ReportJoinCaseUserRepository reportJoinCaseUserRepository;
+    @Autowired
+    private ReportJoinCaseRepository reportJoinCaseRepository;
 
     public List<CasesModel> getAllCaseWithStatus() {
         List<CasesEntity> allCases = caseRepository.findAllCase();
@@ -76,6 +76,27 @@ public class CaseService {
         model.setPicture_done(caseById.getCases().getPicture_done());
         model.setUser(userModel);
         return model;
+    }
+
+    public List<AllCasesModel> getAllCase() {
+        List<ReportJoinCaseEntity> allCases = reportJoinCaseRepository.findAllReportJoinCase();
+
+        List<AllCasesModel> casesData = allCases.stream().map(entity -> {
+            AllCasesModel model = new AllCasesModel();
+            model.setCaseId(entity.getCases().getId());
+            model.setStatus(entity.getStatus());
+            model.setPicture(entity.getCases().getPicture());
+            model.setDateOpened(entity.getCases().getDate_opened());
+            model.setDamage_value(entity.getDamageValue());
+            model.setCategory(entity.getCases().getCategory());
+            model.setDetail(entity.getCases().getDetail());
+
+
+
+            return model;
+        }).collect(Collectors.toList());
+
+        return casesData;
     }
 
 
