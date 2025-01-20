@@ -7,7 +7,7 @@ import lombok.Data;
 public class OverviewMap {
     private String case_id;
     private String category;
-    private String location;
+    private LocationModel location;
     private String status;
 
 }

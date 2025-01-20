@@ -10,7 +10,7 @@ public class NewsModel {
     private String picture;
     private String title;
     private LocalDate date;
-    private String location;
+    private LocationModel location;
     private String content;
     private String type;
 }

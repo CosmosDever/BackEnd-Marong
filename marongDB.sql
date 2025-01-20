@@ -25,17 +25,19 @@ CREATE TABLE cases (
                        detail VARCHAR(255) NOT NULL,
                        picture VARCHAR(255),
                        picture_done VARCHAR(255),
-                       location VARCHAR(255),
+                       location_description VARCHAR(255),
+                       latitude VARCHAR(255),
+                       longitude VARCHAR(255),
                        date_opened DATETIME DEFAULT NOW(),
                        date_closed DATETIME,
                        INDEX (category)
 );
 
 -- Insert Mock Data for Cases
-INSERT INTO cases (category, detail, picture, location)
+INSERT INTO cases (category, detail, picture, location_description,latitude,longitude)
 VALUES
-    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street'),
-    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue');
+    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street','1234','331231'),
+    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue','43242','31231');
 
 -- Create Reports Table
 CREATE TABLE reports (
@@ -68,16 +70,18 @@ CREATE TABLE news (
                       type VARCHAR(255) NOT NULL,
                       content TEXT NOT NULL,
                       picture VARCHAR(255),
-                      location VARCHAR(255),
+                      location_description VARCHAR(255),
+                      latitude VARCHAR(255),
+                      longitude VARCHAR(255),
                       published_at DATETIME DEFAULT NOW(),
                       INDEX (title)
 );
 
 -- Insert Mock Data for News
-INSERT INTO news (title,type, content, picture, location)
+INSERT INTO news (title,type, content, picture, location_description,latitude,longitude)
 VALUES
-    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street'),
-    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park');
+    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street','432423','432423'),
+    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park','423423','324234');
 
 -- Create Email Verifications Table
 CREATE TABLE email_verifications (

@@ -24,12 +24,20 @@ public class NewsEntity {
     @Column(name = "published_at", columnDefinition = "DATETIME DEFAULT NOW()")
     private LocalDate date;
 
-    @Column(name = "location")
-    private String location;
+    @Column(name = "location_description")
+    private String location_description;
+
+    @Column(name = "latitude")
+    private String latitude;
+
+    @Column(name = "longitude")
+    private String longitude;
 
     @Column(name = "content")
     private String content;
 
     @Column(name = "type")
     private String type;
+
+   
 }

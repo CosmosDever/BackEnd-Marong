@@ -3,6 +3,7 @@ package org.prod.marong.controller;
 import org.modelmapper.ModelMapper;
 import org.prod.marong.model.ResponseModel;
 import org.prod.marong.model.UserModel;
+import org.prod.marong.model.UserModel2;
 import org.prod.marong.service.TestService;
 import org.prod.marong.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class UserController {
 
 
     @GetMapping("/api/profile/{id}/info")
-    public ResponseModel getProfileById(@PathVariable("id") String id){
+    public ResponseModel getProfile(@PathVariable("id") String id){
         try {
             UserModel userData = userService.getUserData(id);
             return ResponseModel.builder()
@@ -81,9 +82,14 @@ public class UserController {
     }
 
     @PatchMapping("/api/profile/{id}/edit")
-    public ResponseModel updateProfileById(@PathVariable("id") String id){
+    public ResponseModel updateProfileById(@PathVariable("id") String id,
+                                           @RequestParam("fullname") String fullname,
+                                           @RequestParam("birthday") String birthday,
+                                           @RequestParam("gender") String gender,
+                                           @RequestParam("picture") String picture
+                                           ){
         try {
-            UserModel userData = userService.getUserData(id);
+            UserModel2 userData = userService.updateProfile(id,fullname,birthday,gender,picture);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("User data retrieved successfully")

@@ -1,14 +1,14 @@
 package org.prod.marong.model.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
-
 @Entity
 @Table(name = "reports")
 @Data
-public class ReportEntity {
+public class ReportJoinCaseUserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +37,23 @@ public class ReportEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "cases", // Join table name
+            joinColumns = @JoinColumn(name = "case_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id",referencedColumnName = "id")
+    )
+    private CasesEntity cases;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users", // Join table name
+            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id",referencedColumnName = "id")
+    )
+    private UserEntity user;
+
+  
+
 }

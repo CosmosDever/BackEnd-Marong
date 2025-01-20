@@ -60,9 +60,15 @@ public class OverviewService {
         List<OverviewMap> toMap = new ArrayList<>();
         for (ReportJoinCaseEntity reportCase : allCases) {
             OverviewMap overviewMap = new OverviewMap();
+            LocationModel location = new LocationModel();
+            location.setDescription(reportCase.getCases().getLocation_description());
+            String[] coordinates = new String[2];
+            coordinates[0] = reportCase.getCases().getLatitude();
+            coordinates[1] = reportCase.getCases().getLongitude();
+            location.setCoordinates(coordinates);
             overviewMap.setCase_id(reportCase.getCases().getId().toString());
             overviewMap.setCategory(reportCase.getCategory());
-            overviewMap.setLocation(reportCase.getCases().getLocation());
+            overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
             toMap.add(overviewMap);
         }
@@ -107,9 +113,15 @@ public class OverviewService {
         List<OverviewMap> toMap = new ArrayList<>();
         for (ReportJoinCaseEntity reportCase : allCases) {
             OverviewMap overviewMap = new OverviewMap();
+            LocationModel location = new LocationModel();
+            location.setDescription(reportCase.getCases().getLocation_description());
+            String[] coordinates = new String[2];
+            coordinates[0] = reportCase.getCases().getLatitude();
+            coordinates[1] = reportCase.getCases().getLongitude();
+            location.setCoordinates(coordinates);
             overviewMap.setCase_id(reportCase.getCases().getId().toString());
             overviewMap.setCategory(reportCase.getCategory());
-            overviewMap.setLocation(reportCase.getCases().getLocation());
+            overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
             toMap.add(overviewMap);
         }
@@ -154,9 +166,15 @@ public class OverviewService {
         List<OverviewMap> toMap = new ArrayList<>();
         for (ReportJoinCaseEntity reportCase : allCases) {
             OverviewMap overviewMap = new OverviewMap();
+            LocationModel location = new LocationModel();
+            location.setDescription(reportCase.getCases().getLocation_description());
+            String[] coordinates = new String[2];
+            coordinates[0] = reportCase.getCases().getLatitude();
+            coordinates[1] = reportCase.getCases().getLongitude();
+            location.setCoordinates(coordinates);
             overviewMap.setCase_id(reportCase.getCases().getId().toString());
             overviewMap.setCategory(reportCase.getCategory());
-            overviewMap.setLocation(reportCase.getCases().getLocation());
+            overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
             toMap.add(overviewMap);
         }
@@ -201,9 +219,15 @@ public class OverviewService {
         List<OverviewMap> toMap = new ArrayList<>();
         for (ReportJoinCaseEntity reportCase : allCases) {
             OverviewMap overviewMap = new OverviewMap();
+            LocationModel location = new LocationModel();
+            location.setDescription(reportCase.getCases().getLocation_description());
+            String[] coordinates = new String[2];
+            coordinates[0] = reportCase.getCases().getLatitude();
+            coordinates[1] = reportCase.getCases().getLongitude();
+            location.setCoordinates(coordinates);
             overviewMap.setCase_id(reportCase.getCases().getId().toString());
             overviewMap.setCategory(reportCase.getCategory());
-            overviewMap.setLocation(reportCase.getCases().getLocation());
+            overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
             toMap.add(overviewMap);
         }
@@ -248,9 +272,15 @@ public class OverviewService {
         List<OverviewMap> toMap = new ArrayList<>();
         for (ReportJoinCaseEntity reportCase : allCases) {
             OverviewMap overviewMap = new OverviewMap();
+            LocationModel location = new LocationModel();
+            location.setDescription(reportCase.getCases().getLocation_description());
+            String[] coordinates = new String[2];
+            coordinates[0] = reportCase.getCases().getLatitude();
+            coordinates[1] = reportCase.getCases().getLongitude();
+            location.setCoordinates(coordinates);
             overviewMap.setCase_id(reportCase.getCases().getId().toString());
             overviewMap.setCategory(reportCase.getCategory());
-            overviewMap.setLocation(reportCase.getCases().getLocation());
+            overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
             toMap.add(overviewMap);
         }

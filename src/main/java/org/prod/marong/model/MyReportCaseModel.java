@@ -6,7 +6,7 @@ import lombok.Data;
 public class MyReportCaseModel {
     private String id;
     private String type_of_issue;
-    private String location;
+    private LocationModel location;
     private String picture;
     private String detail;
     private String damage_value;

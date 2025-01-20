@@ -3,15 +3,15 @@ package org.prod.marong.model;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
-public class CasesModel {
+public class AllCasesModel {
     private Long caseId;
     private String category;
     private String detail;
     private String picture;
-    private LocationModel location;
     private LocalDate dateOpened;
-    private LocalDate dateClosed;
-    private String reportStatus;
+    private String status;
+    private String damage_value;
 }

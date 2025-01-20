@@ -2,16 +2,14 @@ package org.prod.marong.model;
 
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
-public class CasesModel {
+public class ReportCaseResponseModel {
     private Long caseId;
     private String category;
     private String detail;
     private String picture;
     private LocationModel location;
-    private LocalDate dateOpened;
-    private LocalDate dateClosed;
-    private String reportStatus;
+    private String date_opened;
+    private String status;
+
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 public class CasesEntity {
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "picture")
@@ -19,8 +19,14 @@ public class CasesEntity {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "location")
-    private String location;
+    @Column(name = "location_description")
+    private String location_description;
+
+    @Column(name = "latitude")
+    private String latitude;
+
+    @Column(name = "longitude")
+    private String longitude;
 
     @Column(name = "date_opened")
     private LocalDate date_opened;
