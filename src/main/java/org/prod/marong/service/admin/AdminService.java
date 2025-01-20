@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,7 +70,7 @@ public class AdminService {
             if (adminDetailDto.getRole() != null) {
                 Optional<RoleEntity> roleOpt = roleRepository.findByName("ROLE_" + adminDetailDto.getRole());
                 if (roleOpt.isPresent()) {
-                    user.setRoles(List.of(roleOpt.get()));
+                    user.setRoles(new ArrayList<>(List.of(roleOpt.get())));
                 } else {
                     throw new RuntimeException("Role not found: " + adminDetailDto.getRole());
                 }
@@ -98,7 +98,7 @@ public class AdminService {
         user.setPicture(adminDetailDto.getPicture());
         RoleEntity role = roleRepository.findByName("ROLE_" + adminDetailDto.getRole())
                 .orElseThrow(() -> new RuntimeException("Role not found: " + adminDetailDto.getRole()));
-        user.setRoles(List.of(role));
+        user.setRoles(new ArrayList<>(List.of(role)));
         user.setBirthday(adminDetailDto.getBirthday());
         user.setGender(adminDetailDto.getGender());
         user.setTelephone(adminDetailDto.getTelephone());
@@ -106,15 +106,13 @@ public class AdminService {
         return convertToAdminDetailDto(user);
     }
 
-   
-
     private AdminDto convertToAdminDto(UserEntity user) {
         AdminDto adminDto = new AdminDto();
         adminDto.setId(user.getId());
         adminDto.setPicture(user.getPicture());
         adminDto.setFullName(user.getFullName());
         adminDto.setRole(user.getRoles().stream().findFirst().get().getName());
-        return adminDto;   
+        return adminDto;
     }
 
     private AdminDetailDto convertToAdminDetailDto(UserEntity user) {
@@ -130,7 +128,4 @@ public class AdminService {
         adminDetailDto.setRole(user.getRoles().stream().findFirst().get().getName());
         return adminDetailDto;
     }
-
-
-    
 }
