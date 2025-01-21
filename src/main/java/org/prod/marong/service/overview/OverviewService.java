@@ -70,6 +70,10 @@ public class OverviewService {
             overviewMap.setCategory(reportCase.getCategory());
             overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
+            overviewMap.setPicture(reportCase.getCases().getPicture());
+            overviewMap.setPicture_done(reportCase.getCases().getPicture_done());
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_opened()));
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_closed()));
             toMap.add(overviewMap);
         }
         dataOverview.setToMap(toMap);
@@ -123,6 +127,10 @@ public class OverviewService {
             overviewMap.setCategory(reportCase.getCategory());
             overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
+            overviewMap.setPicture(reportCase.getCases().getPicture());
+            overviewMap.setPicture_done(reportCase.getCases().getPicture_done());
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_opened()));
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_closed()));
             toMap.add(overviewMap);
         }
         dataOverview.setToMap(toMap);
@@ -176,6 +184,10 @@ public class OverviewService {
             overviewMap.setCategory(reportCase.getCategory());
             overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
+            overviewMap.setPicture(reportCase.getCases().getPicture());
+            overviewMap.setPicture_done(reportCase.getCases().getPicture_done());
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_opened()));
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_closed()));
             toMap.add(overviewMap);
         }
         dataOverview.setToMap(toMap);
@@ -229,6 +241,10 @@ public class OverviewService {
             overviewMap.setCategory(reportCase.getCategory());
             overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
+            overviewMap.setPicture(reportCase.getCases().getPicture());
+            overviewMap.setPicture_done(reportCase.getCases().getPicture_done());
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_opened()));
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_closed()));
             toMap.add(overviewMap);
         }
         dataOverview.setToMap(toMap);
@@ -282,6 +298,10 @@ public class OverviewService {
             overviewMap.setCategory(reportCase.getCategory());
             overviewMap.setLocation(location);
             overviewMap.setStatus(reportCase.getStatus());
+            overviewMap.setPicture(reportCase.getCases().getPicture());
+            overviewMap.setPicture_done(reportCase.getCases().getPicture_done());
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_opened()));
+            overviewMap.setDate_opened(String.valueOf(reportCase.getCases().getDate_closed()));
             toMap.add(overviewMap);
         }
         dataOverview.setToMap(toMap);
