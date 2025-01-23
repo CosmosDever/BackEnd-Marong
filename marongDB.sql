@@ -34,10 +34,12 @@ CREATE TABLE cases (
 );
 
 -- Insert Mock Data for Cases
-INSERT INTO cases (category, detail, picture, location_description,latitude,longitude)
+INSERT INTO cases (category, detail, picture, location_description, latitude, longitude)
 VALUES
-    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street','13.720211','100.558915'),
-    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue','13.714444','100.571352');
+    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street', '13.720211', '100.558915'),
+    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue', '13.714444', '100.571352'),
+    ('Overpass Damage', 'Structural damage to the overpass near the highway', 'http://example.com/overpass.jpg', 'Highway Overpass', '13.721234', '100.560987'),
+    ('Wire Damage', 'Electric wires hanging low at Elm Street', 'http://example.com/wire.jpg', 'Elm Street', '13.722345', '100.562345');
 
 -- Create Reports Table
 CREATE TABLE reports (
@@ -61,7 +63,10 @@ CREATE TABLE reports (
 INSERT INTO reports (status, damage_value, category, detail_detect, case_id, user_id)
 VALUES
     ('inprogress', 1000.00, 'Road Damage', 'The road is cracked and needs repair.', 1, 1),
-    ('done', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2);
+    ('done', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2),
+    ('inprogress', 2000.00, 'Overpass Damage', 'The overpass has visible cracks and requires immediate structural assessment.', 3, 2),
+    ('pending', 150.00, 'Wire Damage', 'Electric wires are hanging low and pose a safety hazard.', 4, 2);
+
 
 -- Create News Table
 CREATE TABLE news (
