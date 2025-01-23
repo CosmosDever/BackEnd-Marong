@@ -36,8 +36,8 @@ CREATE TABLE cases (
 -- Insert Mock Data for Cases
 INSERT INTO cases (category, detail, picture, location_description,latitude,longitude)
 VALUES
-    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street','1234','331231'),
-    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue','43242','31231');
+    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street','13.720211','100.558915'),
+    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue','13.714444','100.571352');
 
 -- Create Reports Table
 CREATE TABLE reports (
@@ -80,8 +80,8 @@ CREATE TABLE news (
 -- Insert Mock Data for News
 INSERT INTO news (title,type, content, picture, location_description,latitude,longitude)
 VALUES
-    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street','432423','432423'),
-    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park','423423','324234');
+    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street','13.715118','100.579940'),
+    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park','13.706424','100.574480');
 
 -- Create Email Verifications Table
 CREATE TABLE email_verifications (
