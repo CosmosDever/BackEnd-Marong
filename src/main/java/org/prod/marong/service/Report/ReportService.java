@@ -27,13 +27,13 @@ public class ReportService {
         }
         String LocalDate = String.valueOf(LocalDateTime.now());
         // Update the case status to "In Progress"
-        reportEntity.setStatus("In progress");
+        reportEntity.setStatus("InProgress");
         reportEntity.setUpdatedAt(LocalDateTime.parse(LocalDate));
         ReportEntity report = reportRepository.save(reportEntity);
 
         ChangeStatusResponseModel reportModelResponse = new ChangeStatusResponseModel();
         reportModelResponse.setCase_id(report.getCaseId().toString());
-        reportModelResponse.setStatus("In progress");
+        reportModelResponse.setStatus("InProgress");
         reportModelResponse.setDetail("กำลังส่งเรื่องให้หน่วยงานที่เกี่ยวข้องเพื่อทำการแก้ไขครับ");
         reportModelResponse.setDate_updated(LocalDate);
 
