@@ -95,7 +95,7 @@ public class MyReportService {
 
         // Optionally, you can also create a report for this case
         ReportEntity newReport = new ReportEntity();
-        newReport.setStatus("pending");
+        newReport.setStatus("Waiting");
         newReport.setCategory(category);
         newReport.setCaseId(Math.toIntExact(savedCase.getId()));
         newReport.setUserId(Integer.valueOf(id));
@@ -114,7 +114,7 @@ public class MyReportService {
         response.setCategory(category);
         response.setLocation(location);
         response.setDetail(detail);
-        response.setStatus("waiting");
+        response.setStatus("Waiting");
         return response;
     }
 

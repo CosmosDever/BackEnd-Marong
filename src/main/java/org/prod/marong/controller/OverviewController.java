@@ -87,7 +87,7 @@ public class OverviewController {
     }
 
     @GetMapping("/api/overview/overpass")
-    public ResponseModel OVAllOverviewOverpass(){
+    public ResponseModel AllOverviewOverpass(){
         try {
             OverviewModel response = overviewService.getAllOverviewOverpass();
             return ResponseModel.builder()
