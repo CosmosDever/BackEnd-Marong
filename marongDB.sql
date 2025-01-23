@@ -62,10 +62,10 @@ CREATE TABLE reports (
 -- Insert Mock Data for Reports
 INSERT INTO reports (status, damage_value, category, detail_detect, case_id, user_id)
 VALUES
-    ('inprogress', 1000.00, 'Road Damage', 'The road is cracked and needs repair.', 1, 1),
-    ('done', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2),
-    ('cancel', 2000.00, 'Overpass Damage', 'The overpass has visible cracks and requires immediate structural assessment.', 3, 2),
-    ('close', 150.00, 'Wire Damage', 'Electric wires are hanging low and pose a safety hazard.', 4, 2);
+    ('InProgress', 1000.00, 'Road Damage', 'The road is cracked and needs repair.', 1, 1),
+    ('Waiting', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2),
+    ('Done', 2000.00, 'Overpass Damage', 'The overpass has visible cracks and requires immediate structural assessment.', 3, 2),
+    ('Cancel', 150.00, 'Wire Damage', 'Electric wires are hanging low and pose a safety hazard.', 4, 2);
 
 
 -- Create News Table
