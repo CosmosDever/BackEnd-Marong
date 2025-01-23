@@ -137,5 +137,17 @@ VALUES
     (2, 2),  -- Jane Smith as User
     (3, 3);  -- Master Admin
 
-
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    case_id INT NOT NULL,
+    user_id INT NOT NULL,
+    detail_detect TEXT,
+    date_closed DATETIME,
+    status VARCHAR(50),
+    FOREIGN KEY (case_id) REFERENCES cases(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (detail_detect) REFERENCES reports(detail_detect),
+    FOREIGN KEY (date_closed) REFERENCES cases(date_closed),
+    FOREIGN KEY (status) REFERENCES reports(status)
+);
 
