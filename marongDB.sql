@@ -36,8 +36,8 @@ CREATE TABLE cases (
 -- Insert Mock Data for Cases
 INSERT INTO cases (category, detail, picture, location_description,latitude,longitude)
 VALUES
-    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street','1234','331231'),
-    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue','43242','31231');
+    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street','13.720211','100.558915'),
+    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue','13.714444','100.571352');
 
 -- Create Reports Table
 CREATE TABLE reports (
@@ -60,8 +60,8 @@ CREATE TABLE reports (
 -- Insert Mock Data for Reports
 INSERT INTO reports (status, damage_value, category, detail_detect, case_id, user_id)
 VALUES
-    ('pending', 1000.00, 'Road Damage', 'The road is cracked and needs repair.', 1, 1),
-    ('closed', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2);
+    ('inprogress', 1000.00, 'Road Damage', 'The road is cracked and needs repair.', 1, 1),
+    ('done', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2);
 
 -- Create News Table
 CREATE TABLE news (
@@ -80,8 +80,8 @@ CREATE TABLE news (
 -- Insert Mock Data for News
 INSERT INTO news (title,type, content, picture, location_description,latitude,longitude)
 VALUES
-    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street','432423','432423'),
-    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park','423423','324234');
+    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street','13.715118','100.579940'),
+    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park','13.706424','100.574480');
 
 -- Create Email Verifications Table
 CREATE TABLE email_verifications (
@@ -137,5 +137,17 @@ VALUES
     (2, 2),  -- Jane Smith as User
     (3, 3);  -- Master Admin
 
-
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    case_id INT NOT NULL,
+    user_id INT NOT NULL,
+    detail_detect TEXT,
+    date_closed DATETIME,
+    status VARCHAR(50),
+    FOREIGN KEY (case_id) REFERENCES cases(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (detail_detect) REFERENCES reports(detail_detect),
+    FOREIGN KEY (date_closed) REFERENCES cases(date_closed),
+    FOREIGN KEY (status) REFERENCES reports(status)
+);
 
