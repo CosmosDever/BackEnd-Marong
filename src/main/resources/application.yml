@@ -1,0 +1,12 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mahatomahato45@gmail.com
+    password: pvpw yvmz tiqu nzvc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
