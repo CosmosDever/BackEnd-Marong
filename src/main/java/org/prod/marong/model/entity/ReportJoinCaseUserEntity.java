@@ -46,12 +46,8 @@ public class ReportJoinCaseUserEntity {
     )
     private CasesEntity cases;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users", // Join table name
-            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id",referencedColumnName = "id")
-    )
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false) // Join with `users` table
     private UserEntity user;
 
   

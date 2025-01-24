@@ -11,6 +11,9 @@ public interface ReportJoinCaseUserRepository extends JpaRepository<ReportJoinCa
     @Query("SELECT n FROM ReportJoinCaseUserEntity n WHERE n.userId = :id")
     ReportJoinCaseUserEntity findReportJoinCaseUserById(String id);
 
+    @Query("SELECT n FROM ReportJoinCaseUserEntity n WHERE n.caseId = :id")
+    ReportJoinCaseUserEntity findReportJoinCaseUserByCaseId(String id);
+
 
 
 

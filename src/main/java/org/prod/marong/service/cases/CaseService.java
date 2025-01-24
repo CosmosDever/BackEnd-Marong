@@ -52,7 +52,7 @@ public class CaseService {
     }
 
     public CasesByIdModel getCaseById(String id) {
-        ReportJoinCaseUserEntity caseById = reportJoinCaseUserRepository.findReportJoinCaseUserById(id);
+        ReportJoinCaseUserEntity caseById = reportJoinCaseUserRepository.findReportJoinCaseUserByCaseId(id);
         CasesByIdModel model = new CasesByIdModel();
         UserCaseModel userModel = new UserCaseModel();
         LocationModel location = new LocationModel();
@@ -63,6 +63,7 @@ public class CaseService {
         String[] coordinates = new String[2];
         coordinates[0] = caseById.getCases().getLatitude();
         coordinates[1] = caseById.getCases().getLongitude();
+        location.setDescription(caseById.getCases().getLocation_description());
         location.setCoordinates(coordinates);
         model.setCaseId(String.valueOf(caseById.getCaseId()));
         model.setCategory(caseById.getCategory());
