@@ -14,9 +14,9 @@ CREATE TABLE users (
 -- Insert Mock Data for Users
 INSERT INTO users (gmail, full_name, birthday, telephone, gender, password, picture)
 VALUES
-    ('admin@example.com', 'John Doe', '1990-01-01 00:00:00', '0849874867', 'Male', '$2a$10$WWIIXVeEp84wH8RqbM0Z1.jycfkQOaEnkA/U1SUIVZDJ0258lHa2e', 'http://example.com/john.jpg'),
-    ('User@example.com', 'Jane Smith', '1992-02-02 00:00:00', '0984783758', 'Female', '$2a$10$acpqGHt9lC1C.zvmohlyo.ZAjLHerzte0zcpowUHDtpwKBDHzNU8y', 'http://example.com/jane.jpg'),
-    ('msaidmin@gmail.com', 'Master Admin', '1992-02-02 00:00:00', '0984783758','Male', '$2a$10$ZRCWxcMW1egzmMq66ggkwe7UwTVApaql9AkuL3GdaUp8ZBykzWoLi', 'http://example.com/jane.jpg');
+    ('admin@example.com', 'John Doe', '1990-01-01 00:00:00', '0849874867', 'Male', '$2a$10$WWIIXVeEp84wH8RqbM0Z1.jycfkQOaEnkA/U1SUIVZDJ0258lHa2e', 'https://th.bing.com/th/id/OIP.GKAbRpYzDlJa139WC8xPtwHaIC?rs=1&pid=ImgDetMain'),
+    ('User@example.com', 'Jane Smith', '1992-02-02 00:00:00', '0984783758', 'Female', '$2a$10$acpqGHt9lC1C.zvmohlyo.ZAjLHerzte0zcpowUHDtpwKBDHzNU8y', 'https://th.bing.com/th/id/OIP.GKAbRpYzDlJa139WC8xPtwHaIC?rs=1&pid=ImgDetMain'),
+    ('msaidmin@gmail.com', 'Master Admin', '1992-02-02 00:00:00', '0984783758','Male', '$2a$10$ZRCWxcMW1egzmMq66ggkwe7UwTVApaql9AkuL3GdaUp8ZBykzWoLi', 'https://th.bing.com/th/id/OIP.GKAbRpYzDlJa139WC8xPtwHaIC?rs=1&pid=ImgDetMain');
 
 -- Create Cases Table
 CREATE TABLE cases (
@@ -34,10 +34,12 @@ CREATE TABLE cases (
 );
 
 -- Insert Mock Data for Cases
-INSERT INTO cases (category, detail, picture, location_description,latitude,longitude)
+INSERT INTO cases (category, detail, picture, location_description, latitude, longitude)
 VALUES
-    ('Road Damage', 'Cracked road at Main Street', 'http://example.com/road.jpg', 'Main Street','13.720211','100.558915'),
-    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'http://example.com/sidewalk.jpg', 'Park Avenue','13.714444','100.571352');
+    ('Road Damage', 'Cracked road at Main Street', 'https://th.bing.com/th/id/OIP.6eGGNKkQ0OP7QYyXQ7uvYgHaE7?w=296&h=197&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'Main Street', '13.720211', '100.558915'),
+    ('Damaged Sidewalk', 'Sunken sidewalk near the park', 'https://th.bing.com/th/id/OIP.KOdf5mbVQk0bYgKUfKlB_QHaFW?rs=1&pid=ImgDetMain', 'Park Avenue', '13.714444', '100.571352'),
+    ('Overpass Damage', 'Structural damage to the overpass near the highway', 'https://thethaiger.com/wp-content/uploads/2023/07/S__13640050.jpeg', 'Highway Overpass', '13.721234', '100.560987'),
+    ('Wire Damage', 'Electric wires hanging low at Elm Street', 'https://thumbs.dreamstime.com/b/chaos-cables-wires-electric-pole-bangkok-thail-thailand-92304698.jpg', 'Elm Street', '13.722345', '100.562345');
 
 -- Create Reports Table
 CREATE TABLE reports (
@@ -60,8 +62,11 @@ CREATE TABLE reports (
 -- Insert Mock Data for Reports
 INSERT INTO reports (status, damage_value, category, detail_detect, case_id, user_id)
 VALUES
-    ('inprogress', 1000.00, 'Road Damage', 'The road is cracked and needs repair.', 1, 1),
-    ('done', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2);
+    ('InProgress', 1000.00, 'Road Damage', 'The road is cracked and needs repair.', 1, 1),
+    ('Waiting', 500.00, 'Damaged Sidewalk', 'The sidewalk has a large hole in it.', 2, 2),
+    ('Done', 2000.00, 'Overpass Damage', 'The overpass has visible cracks and requires immediate structural assessment.', 3, 2),
+    ('Cancel', 150.00, 'Wire Damage', 'Electric wires are hanging low and pose a safety hazard.', 4, 2);
+
 
 -- Create News Table
 CREATE TABLE news (
@@ -80,8 +85,8 @@ CREATE TABLE news (
 -- Insert Mock Data for News
 INSERT INTO news (title,type, content, picture, location_description,latitude,longitude)
 VALUES
-    ('Road Repairs Starting Soon','Road', 'The city will begin repairing Main Street next week.', 'http://example.com/road-repair.jpg', 'Main Street','13.715118','100.579940'),
-    ('Park Sidewalk Renovation','Sidewalk', 'The park sidewalk will be renovated starting this month.', 'http://example.com/sidewalk-renovation.jpg', 'City Park','13.706424','100.574480');
+    ('Road Repairs Starting Soon','Road Damage', 'The city will begin repairing Main Street next week.', 'https://th.bing.com/th/id/OIP.6eGGNKkQ0OP7QYyXQ7uvYgHaE7?w=296&h=197&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'Main Street','13.715118','100.579940'),
+    ('Park Sidewalk Renovation','Damaged Sidewalk', 'The park sidewalk will be renovated starting this month.', 'https://th.bing.com/th/id/OIP.KOdf5mbVQk0bYgKUfKlB_QHaFW?rs=1&pid=ImgDetMain', 'City Park','13.706424','100.574480');
 
 -- Create Email Verifications Table
 CREATE TABLE email_verifications (
