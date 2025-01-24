@@ -11,13 +11,20 @@ import java.time.LocalDate;
 public class CasesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "detail")
+    private String detail;
 
     @Column(name = "picture")
     private String picture;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "picture_done")
+    private String picture_done;
 
     @Column(name = "location_description")
     private String location_description;
@@ -34,10 +41,5 @@ public class CasesEntity {
     @Column(name = "date_closed")
     private LocalDate date_closed;
 
-    @Column(name = "detail")
-    private String detail;
-
-    @Column(name = "picture_done")
-    private String picture_done;
 
 }

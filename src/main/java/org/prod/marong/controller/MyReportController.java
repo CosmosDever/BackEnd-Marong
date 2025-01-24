@@ -114,7 +114,7 @@ public class MyReportController {
                                     @RequestParam("detail") String detail,
                                     @RequestParam("location_detail") String location_detail) {
         try {
-            ReportCaseResponseModel data = myReportService.createCase(id, category, latitude, location_detail, longitude, picture, detail);
+            ReportCaseResponseModel data = myReportService.createCase(id, category, latitude, longitude, location_detail, detail, picture);
             return ResponseModel.builder()
                     .statusCode(SUCCESS)
                     .statusMessage("New case added successfully.")

@@ -80,6 +80,7 @@ public class MyReportService {
         coordinates[0] = latitude;
         coordinates[1] = longitude;
         location.setCoordinates(coordinates);
+        location.setDescription(location_detail);
         CasesEntity newCase = new CasesEntity();
         newCase.setCategory(category);
         newCase.setDetail(detail);
@@ -88,6 +89,7 @@ public class MyReportService {
         newCase.setLatitude(latitude);
         newCase.setLongitude(longitude);
         newCase.setDate_opened(LocalDate.now());
+
 
 
         // Save the case entity
